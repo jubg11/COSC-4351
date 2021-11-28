@@ -3,43 +3,30 @@ session_start();
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <!--Include Header Files-->
-<?php require_once __DIR__ . "/ends/header_welcome.php"; ?>
-<?php require_once __DIR__ . "/functions/time_hello.php"; ?>
+<?php require_once __DIR__ . "/ends/header.php"; ?>
 
-<!--Not Logged in to an account-->
-<?php if (!isset($_SESSION["loggedin"])) : ?>
+<div class="container center" id="#card">
 
-	<!--Display Card-->
-	<div class="container center">
-		<div class="card z-depth-2">
+    <div class="card z-depth-2">
 
-			<!--Display Card Buttons-->
-			<div class="card-action z-depth-0">
-				<a href="login/login.php" class="btn-large brand">Log In</a>
-				<a href="login/cregister.php" class="btn-large brand">Register</a>
-			</div>
+        <!--Display Card Image-->
+        <div class="card-image center">
+            <img src="/img/intro.jpg">
+        </div>
 
-			<!--Display Card Image-->
-			<div class="card-image">
-				<img src="img/Fuel.jpg">
-			</div>
+        <!--Display Card Buttons-->
+        <div class="card-action z-depth-0 center">
+            <a href="/login/login.php" class="btn-large brand">Log In</a>
+            <a href="/login/register.php" class="btn-large brand">Register</a>
+        </div>
 
-
-		</div>
-	</div>
-
-	<!--Logged in to an account-->
-<?php else : ?>
-	<div>
-		<?php require __DIR__ . "/user/view.php"; ?>
-	</div>
-
-<?php endif ?>
+    </div>
+</div>
 
 <!--Include Footer File-->
-<?php require_once __DIR__ . "/ends/footer_welcome.php"; ?>
+<?php require_once __DIR__ . "/ends/footer.php"; ?>
 
 </html>

@@ -1,7 +1,7 @@
 	</main>
 	<div id="footer">
 		<footer class="footer-copyright brand">
-			<div class="center white-text">&copy; Copyright 2021 | University of Houston | COSC 4353 | Group 19</div>
+			<div class="center white-text">&copy; Copyright 2021 | University of Houston | COSC 4351</div>
 		</footer>
 	</div>
 
