@@ -19,8 +19,7 @@ session_start();
 
         <!--Display Card Buttons-->
         <div class="card-action z-depth-0 center">
-            <a href="/login/login.php" class="btn-large brand">Log In</a>
-            <a href="/login/register.php" class="btn-large brand">Register</a>
+            <a class="btn brand" href="">Schedule Reservation</a>
         </div>
 
     </div>

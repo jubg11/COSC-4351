@@ -16,13 +16,28 @@ session_start();
 
 <body class="grey darken-2">
 
-  <nav class="brand z-depth-2">
-    <!-- Home Button (always active) -->
-    <ul id="nav-mobile" class="left">
+  <!-- Nav Bar -->
+  <nav class="z-depth-2" id="header">
+
+    <!-- Left Section -->
+    <ul class="left">
       <a href="/Index.php"><i class="material-icons">home</i></a>
     </ul>
 
+    <!-- Right Section -->
+    <ul class="right" id="nav-mobile">
+      <li>
+        <a href="/login/login.php">Log In</a>
+      </li>
+      <li>
+        <a href="/login/register.php">Register</a>
+      </li>
+    </ul>
+
+    <!-- Middle Section -->
     <h1>Placeholder Restaurant</h1>
+
+
   </nav>
 
 
