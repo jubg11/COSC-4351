@@ -7,11 +7,11 @@ if (isset($_SESSION["loggedin"])) {
 }
 
 // Add Login class
-require_once __DIR__ . "/../class/classes.php";
+require_once __DIR__ . "/../class/classLogin.php";
 
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $log = new Login($_POST["User"], $_POST["Pass"]);
+    $log = new Login($_POST);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -39,18 +39,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <span style="color: red;"><?php echo $log->login_err;  ?></span>
     <?php endif ?>
 
-    <!--Form Text-->
-    <div class="input-field left-align">
-        <span class="red-text"><?php echo $log->user_err; ?></span>
-        <!--Error Text-->
-        <input type="text" name="User" value="<?php echo $_POST["User"]; ?>" placeholder="Username" id="input_text" data-length="45" maxlength="45">
-    </div>
-
-    <div class="input-field left-align">
-        <span class="red-text"><?php echo $log->pass_err; ?></span>
-        <!--Error Text-->
-        <input type="password" name="Pass" value="<?php echo $_POST["Pass"]; ?>" placeholder="Password" id="input_text" data-length="45" maxlength="45">
-    </div>
+    <!--Form Input: Login Credentials-->
+    <?php require_once __DIR__ . "/../form/login.php"; ?>
 
     <div class="container">
         <input type="submit" class="btn brand" value="Log in">

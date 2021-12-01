@@ -7,11 +7,11 @@ if (isset($_SESSION["loggedin"])) {
 }
 
 // Add Register class
-require_once __DIR__ . "/../class/classes.php";
+require_once __DIR__ . "/../class/classRegister.php";
 
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $reg = new Register($_POST["User"], $_POST["Pass"]);
+    $reg = new Register($_POST);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -36,30 +36,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <!--Error Text-->
     <?php if (!empty($reg->register_err)) : ?>
-        <span style="color: red;"><?php echo $reg->register_err; ?></span>
+        <span class="red-text"><?php echo $reg->register_err; ?></span>
     <?php endif ?>
 
-    <!--Form Text-->
-    <div class="input-field left-align">
-        <span class="red-text"><?php echo $reg->user_err; ?></span>
-        <input type="text" name="User" value="<?php echo $_POST["User"]; ?>" placeholder="Username" id="input_text" data-length="45" maxlength="45">
-    </div>
+    <!--Form Input: Login Credentials-->
+    <?php require_once __DIR__ . "/../form/login.php"; ?>
 
-    <div class="input-field left-align">
-        <span class="red-text"><?php echo $reg->pass_err; ?></span>
-        <input type="password" name="Pass" value="<?php echo $_POST["Pass"]; ?>" placeholder="Password" id="input_text" data-length="45" maxlength="45">
-    </div>
+    <!-- Form Input: Personal Info -->
+    <?php require_once __DIR__ . "/../form/personal.php"; ?>
+
 
     <div class="container">
         <label style="color: grey; font-size: 20px;"><?php echo $reg->success;  ?></label><br>
         <input type="submit" class="btn brand" value="Create">
+        <p>Already have an account? <a href="login.php">Log in now</a> </p>
     </div>
 
-    <p>Already have an account? <a href="login.php">Log in now</a> </p>
 </form>
 
 
 
+<script src="/script/sameFunction.js"></script>
 <?php require_once __DIR__ . "/../ends/footer.php"; ?>
 
 </html>

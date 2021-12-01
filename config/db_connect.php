@@ -4,8 +4,7 @@
 $link = new mysqli(
 	"database-4351.ctkzz4wlfaku.us-east-2.rds.amazonaws.com",
 	"admin",
-	"cosc4351",
-	"COSC4351"
+	"cosc4351"
 );
 
 // Check connection

@@ -1,4 +1,4 @@
-/* Header Customizations */
+/* Header&Footer Customizations */
 #header h1 {
   font-size: clamp(10px, 6vw, 45px);
   text-shadow: 3px 3px rgba(0, 0, 0, 0.2);
@@ -27,9 +27,7 @@ nav ul a:hover {
 
 /* Card Customizations */
 .card-image {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 40px;
+  margin: 40px auto 0px;
 }
 
 .container.center {
@@ -59,6 +57,13 @@ nav h2 {
   font-size: clamp(30px, 3vw, 45px);
   text-shadow: 3px 3px rgba(0, 0, 0, 0.2);
 }
+h3 {
+  font-weight: bold;
+  vertical-align: middle;
+  text-align: center;
+  font-size: clamp(20px, 3vw, 30px);
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.2);
+}
 
 body {
   display: flex;
@@ -85,33 +90,27 @@ table.highlight > tbody > tr:hover {
   background-color: #b8860b;
 }
 .select-dropdown {
-  color: #673ab7 !important;
-  border-bottom: 1px solid #673ab7 !important;
-  box-shadow: 0 1px 0 0 #673ab7 !important;
+  color: rgb(120, 76, 37) !important;
+  border-bottom: 1px solid rgb(120, 76, 37) !important;
+  box-shadow: 0 1px 0 0 rgb(120, 76, 37) !important;
 }
 
 /* label underline focus color */
-.input-field input[type="text"]:focus {
-  border-bottom: 1px solid #673ab7 !important;
-  box-shadow: 0 1px 0 0 #673ab7 !important;
-}
-/* label underline focus color */
-.input-field input[type="password"]:focus {
-  border-bottom: 1px solid #673ab7 !important;
-  box-shadow: 0 1px 0 0 #673ab7 !important;
-}
-/* label underline focus color */
+.input-field input[type="text"]:focus,
+.input-field input[type="password"]:focus,
+.input-field input[type="email"]:focus,
 .input-field input[type="number"]:focus {
-  border-bottom: 1px solid #673ab7 !important;
-  box-shadow: 0 1px 0 0 #673ab7 !important;
+  border-bottom: 1px solid rgb(120, 76, 37) !important;
+  box-shadow: 0 1px 0 0 rgb(120, 76, 37) !important;
 }
+
 /* label focus color */
 .input-field input[type="submit"]:focus {
   color: white;
 }
-[type="checkbox"].filled-in:checked + span:not(.lever):after {
+input[type="checkbox"].filled-in:checked + span:not(.lever):after {
   border-color: black;
-  background-color: #673ab7;
+  background-color: rgb(120, 76, 37);
 }
 
 :is(h1, h2, h3, h4, h5, h6) {
@@ -119,21 +118,21 @@ table.highlight > tbody > tr:hover {
 }
 
 .datepicker-date-display {
-  background-color: #673ab7;
+  background-color: rgb(120, 76, 37);
 }
 td.is-selected.is-today {
-  background-color: #673ab7 !important;
+  background-color: rgb(120, 76, 37) !important;
   color: white !important;
 }
 td.is-selected {
-  background-color: #673ab7 !important;
+  background-color: rgb(120, 76, 37) !important;
   color: white !important;
 }
 .is-today {
-  color: #673ab7 !important;
+  color: rgb(120, 76, 37) !important;
 }
 .datepicker-day-button:focus {
-  background-color: #673ab7 !important;
+  background-color: rgb(120, 76, 37) !important;
   color: white !important;
 }
 
@@ -141,12 +140,12 @@ td.is-selected {
   color: white;
 }
 .tabs .tab a:hover {
-  background-color: #673ab7;
+  background-color: rgb(120, 76, 37);
   color: white;
 }
 
 .tabs .tab a.active {
-  background-color: #673ab7;
+  background-color: rgb(120, 76, 37);
   color: white;
 }
 
@@ -155,5 +154,9 @@ td.is-selected {
   color: red;
 }
 .tabs .indicator {
-  background-color: #673ab7;
+  background-color: rgb(120, 76, 37);
+}
+
+hr {
+  margin: 5px 20px;
 }
