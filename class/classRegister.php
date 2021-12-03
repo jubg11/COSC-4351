@@ -21,7 +21,7 @@ class Register
     public $b_zip_err = "";
 
     public $register_err = "";
-    public $success = "";
+
 
     public function __construct()
     {
@@ -281,16 +281,11 @@ class Register
                     // Insert Billing Data
                     require __DIR__ . "/../config/db_connect.php";
 
-                    $sql = "INSERT INTO sys.billing_addr (user_id, street_add, street_add2, city, state, zip)
+                    $sql = "INSERT INTO sys.billing_addr (user_id, b_street_add, b_street_add2, b_city, b_state, b_zip)
                     VALUES (?, ?, ?, ? ,? ,?)";
                     $stmt = $link->prepare($sql);
 
                     if ($_POST["SameAdd"]) {
-                        $add1 =  $_POST["S_Add1"];
-                        $add2 =  $_POST["S_Add2"];
-                        $city =  $_POST["S_City"];
-                        $state =  $_POST["S_State"];
-                        $zip =  $_POST["S_Zip"];
                         $stmt->bind_param("ssssss", $id, $add1, $add2, $city, $state, $zip);
                     } else {
                         $add1 =  $_POST["B_Add1"];
@@ -304,6 +299,8 @@ class Register
                     if ($stmt->execute()) {
                         $stmt->close();
                         $link->close();
+                        require __DIR__ . "/../login/logout.php";
+
                         // Redirect user to welcome page
                         echo ("<script>
                         alert('Account has been created.');

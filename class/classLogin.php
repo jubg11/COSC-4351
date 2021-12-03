@@ -43,7 +43,7 @@ class Login
         if ($this->loginValidate() == 0) {
             require __DIR__ . "/../config/db_connect.php";
 
-            $sql = "SELECT user_id, user_password FROM sys.customer_info WHERE user_email = ?";
+            $sql = "SELECT user_id, user_password, name FROM sys.customer_info WHERE user_email = ?";
             $stmt = $link->prepare($sql);
             $email = $_POST["Email"];
             $stmt->bind_param("s", $email);
@@ -54,7 +54,7 @@ class Login
                 if ($stmt->num_rows() == 1) {
 
                     // Store data in session variables
-                    $stmt->bind_result($id, $pass);
+                    $stmt->bind_result($id, $pass, $name);
                     $stmt->fetch();
 
                     // Verifies if the input password matches the hashed password
@@ -64,9 +64,10 @@ class Login
                         session_start();
 
                         //bind vars to session
-                        $_SESSION["loggedin"] = true;
                         $_SESSION["ID"] = $id;
                         $_SESSION["Email"] = $email;
+                        $_SESSION["Name"] = $name;
+                        $_SESSION["Signed"] = "in";
 
                         // Redirect user to welcome page
                         header("location: ../Index.php");

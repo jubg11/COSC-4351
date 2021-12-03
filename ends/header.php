@@ -32,7 +32,7 @@ session_start();
     <ul class="right" id="nav-mobile">
 
       <!--Not Logged in to an account-->
-      <?php if (!isset($_SESSION["loggedin"])) : ?>
+      <?php if (strcmp($_SESSION["Signed"], "in") != 0) : ?>
         <li>
           <a href="/login/login.php">Log In</a>
         </li>
@@ -43,10 +43,13 @@ session_start();
         <!--Logged in to an account-->
       <?php else : ?>
         <li>
-          <a href="/login/logout.php">Edit Account</a>
+          <a href="/user/edit.php">Edit Account</a>
         </li>
         <li>
-          <a href="/login/logout.php">View Account</a>
+          <a href="/user/view.php">View Account</a>
+        </li>
+        <li>
+          <a href="/user/past.php">Reservations</a>
         </li>
         <li>
           <a href="/login/logout.php">Logout</a>
@@ -55,8 +58,19 @@ session_start();
     </ul>
 
     <!-- Middle Section -->
-    <h1>Placeholder Restaurant</h1>
+    <?php if (strcmp($_SESSION["Signed"], "in") != 0) : ?>
+      <h1>Placeholder Restaurant</h1>
+    <?php else : ?>
+      <h1 style="padding: 0px 0px 0px clamp(0vw, 18vw, 24vw);">Placeholder Restaurant</h1>
+    <?php endif ?>
   </nav>
+
+
+  <?php if (strcmp($_SESSION["Signed"], "in") == 0) : ?>
+    <div class="grey darken-1 z-depth-1">
+      <h4>Hello <?php echo ($_SESSION["Name"]); ?></h4>
+    </div>
+  <?php endif ?>
 
 
   <main>

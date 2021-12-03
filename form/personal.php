@@ -32,7 +32,7 @@
         </div>
         <div class="input-field left-align">
             <span class="red-text"><?php echo $reg->s_state_err; ?></span>
-            <input type="text" name="S_State" value="<?php echo $_POST["S_State"]; ?>" placeholder="State" list="state" data-length="2" maxlength="2">
+            <input type="text" name="S_State" onfocus="this.value=''" value="<?php echo $_POST["S_State"]; ?>" placeholder="State" list="state" data-length="2" maxlength="2">
         </div>
         <div class="input-field left-align">
             <span class="red-text"><?php echo $reg->s_zip_err; ?></span>
@@ -69,7 +69,7 @@
         </div>
         <div class="input-field left-align">
             <span class="red-text"><?php echo $reg->b_state_err; ?></span>
-            <input type="text" name="B_State" value="<?php echo $_POST["B_State"]; ?>" placeholder="State" list="state" data-length="2" maxlength="2">
+            <input type="text" name="B_State" onfocus="this.value=''" value="<?php echo $_POST["B_State"]; ?>" placeholder="State" list="state" data-length="2" maxlength="2">
         </div>
         <div class="input-field left-align">
             <span class="red-text"><?php echo $reg->b_zip_err; ?></span>

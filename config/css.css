@@ -25,6 +25,16 @@ nav ul a:hover {
   color: gold;
 }
 
+h4 {
+  color: white;
+  font-weight: bold;
+  font-style: italic;
+  font-size: clamp(10px, 6vw, 20px);
+  text-shadow: 3px 3px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  vertical-align: middle;
+}
+
 /* Card Customizations */
 .card-image {
   margin: 40px auto 0px;
@@ -34,7 +44,8 @@ nav ul a:hover {
   width: 75%;
 }
 
-.brand-text {
+.brand-text,
+.dropdown-content > li > span {
   color: rgba(120, 76, 37, 0.8739204299884016);
 }
 .brand {
@@ -50,7 +61,8 @@ form {
   margin-left: 20px;
   margin-right: 20px;
 }
-nav h2 {
+nav h2,
+h3 {
   font-weight: bold;
   vertical-align: middle;
   text-align: center;
@@ -58,9 +70,6 @@ nav h2 {
   text-shadow: 3px 3px rgba(0, 0, 0, 0.2);
 }
 h3 {
-  font-weight: bold;
-  vertical-align: middle;
-  text-align: center;
   font-size: clamp(20px, 3vw, 30px);
   text-shadow: 1px 1px rgba(0, 0, 0, 0.2);
 }
@@ -74,8 +83,13 @@ main {
   flex: 1 0 auto;
 }
 
-table.highlight > tbody > tr:hover {
-  background-color: #d1c4e9 !important;
+.view tr:hover {
+  background: rgb(120, 76, 37);
+  background: radial-gradient(
+    circle,
+    rgba(120, 76, 37, 0.8739204299884016) 66%,
+    rgba(120, 76, 37, 0.6274218305486257) 98%
+  );
 }
 
 .btn,
@@ -85,14 +99,40 @@ table.highlight > tbody > tr:hover {
   text-shadow: 1px 1px rgba(0, 0, 0, 0.2);
 }
 
+.div-left,
+.div-mid,
+.div-right {
+  background: white;
+  color: black;
+  margin: 40px auto;
+  width: 25%;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+  float: left;
+}
+.div-left {
+  margin: 40px 0px 0px 6vw;
+}
+.div-mid {
+  margin: 40px 3vw 0px 6vw;
+}
+.div-right {
+  margin: 40px 6vw 0px 0px;
+  float: right;
+}
+
+tr {
+  border: 3px solid grey !important;
+}
+
 .btn:hover,
 .btn-large:hover {
   background-color: #b8860b;
 }
-.select-dropdown {
+.select-dropdown,
+.dropdown-content {
   color: rgb(120, 76, 37) !important;
   border-bottom: 1px solid rgb(120, 76, 37) !important;
-  box-shadow: 0 1px 0 0 rgb(120, 76, 37) !important;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* label underline focus color */
@@ -101,7 +141,7 @@ table.highlight > tbody > tr:hover {
 .input-field input[type="email"]:focus,
 .input-field input[type="number"]:focus {
   border-bottom: 1px solid rgb(120, 76, 37) !important;
-  box-shadow: 0 1px 0 0 rgb(120, 76, 37) !important;
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2) !important;
 }
 
 /* label focus color */
@@ -125,7 +165,7 @@ td.is-selected.is-today {
   color: white !important;
 }
 td.is-selected {
-  background-color: rgb(120, 76, 37) !important;
+  background-color: #b8860b !important;
   color: white !important;
 }
 .is-today {
@@ -134,27 +174,6 @@ td.is-selected {
 .datepicker-day-button:focus {
   background-color: rgb(120, 76, 37) !important;
   color: white !important;
-}
-
-.tabs .tab a {
-  color: white;
-}
-.tabs .tab a:hover {
-  background-color: rgb(120, 76, 37);
-  color: white;
-}
-
-.tabs .tab a.active {
-  background-color: rgb(120, 76, 37);
-  color: white;
-}
-
-.tabs .tab.disabled a,
-.tabs .tab.disabled a:hover {
-  color: red;
-}
-.tabs .indicator {
-  background-color: rgb(120, 76, 37);
 }
 
 hr {

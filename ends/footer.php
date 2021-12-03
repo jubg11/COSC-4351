@@ -2,6 +2,7 @@
 	<div id="footer">
 		<footer class="footer-copyright">
 			<div class="center">&copy; Copyright 2021 | University of Houston | COSC 4351</div>
+			<div class="center">Hours of Operation: 10AM - 10PM EVERYDAY!!</div>
 		</footer>
 	</div>
 

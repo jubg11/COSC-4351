@@ -3,18 +3,22 @@
 //Start Session
 session_start();
 
-// Redirect if logged in
-if (strcmp($_SESSION["Signed"], "in") == 0) {
+// Redirect if not logged in
+if (strcmp($_SESSION["Signed"], "in") != 0) {
     header("location: ../Index.php");
     exit;
 }
 
-// Add Register class
-require_once __DIR__ . "/../class/classRegister.php";
+// Add Edit class
+require_once __DIR__ . "/../class/classEdit.php";
 
+$reg = new Edit;
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $reg = new Register($_POST);
+    $reg->UpdateAttempt();
+    $reg->ShowAccount();
+} else {
+    $reg->ShowAccount();
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -33,9 +37,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <!--Header Text-->
     <nav class="brand">
-        <h2>Create Account</h2>
+        <h2>Edit Account</h2>
     </nav>
-    <p class="center">Please fill this form out to create an account.</p>
+    <p class="center">Please make any desired changes your account.</p>
 
     <!--Error Text-->
     <?php if (!empty($reg->register_err)) : ?>
@@ -50,8 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     <div class="container">
-        <input type="submit" class="btn brand" value="Create">
-        <p>Already have an account? <a href="login.php">Log in now</a> </p>
+        <input type="submit" class="btn brand" value="Submit Changes">
     </div>
 
 </form>

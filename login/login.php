@@ -1,7 +1,10 @@
 <?php
 
-// Redirect if already logged in
-if (isset($_SESSION["loggedin"])) {
+//Start Session
+session_start();
+
+// Redirect if logged in
+if (strcmp($_SESSION["Signed"], "in") == 0) {
     header("location: ../Index.php");
     exit;
 }

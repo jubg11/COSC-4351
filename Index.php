@@ -19,7 +19,7 @@ session_start();
 
         <!--Display Card Buttons-->
         <div class="card-action z-depth-0 center">
-            <a class="btn brand" href="">Schedule Reservation</a>
+            <a class="btn brand" href="/user/reservation.php">Schedule Reservation</a>
         </div>
 
     </div>
