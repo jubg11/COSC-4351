@@ -6,5 +6,6 @@
 
 <div class="input-field left-align">
     <span class="red-text"><?php echo $reg->pass_err; ?></span>
+    <span class="red-text"><?php echo $log->pass_err; ?></span>
     <input type="password" name="Pass" value="<?php echo $_POST["Pass"]; ?>" placeholder="Password" id="input_text" data-length="50" maxlength="50">
 </div>

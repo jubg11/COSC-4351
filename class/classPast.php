@@ -19,10 +19,10 @@ class Past
 
         $sql = "SELECT *
             FROM sys.reservation_tables
-            WHERE user_id = ? AND reserved = 1
+            WHERE email = ? AND reserved = 1
             ORDER BY reservation_time";
         $stmt = $link->prepare($sql);
-        $stmt->bind_param("s", $_SESSION["ID"]);
+        $stmt->bind_param("s", $_SESSION["Email"]);
 
         if ($stmt->execute()) {
             $result = $stmt->get_result();
@@ -73,9 +73,9 @@ class Past
 
         $sql = "UPDATE sys.reservation_tables
             SET name = null, phone_num = null, email = null, guests = null, user_id = null, reserved = 0 
-            WHERE user_id = ? AND table_id = ?";
+            WHERE email = ? AND table_id = ?";
         $stmt = $link->prepare($sql);
-        $stmt->bind_param("ss", $_SESSION["ID"], $_POST["Reserve_ID"]);
+        $stmt->bind_param("ss", $_SESSION["Email"], $_POST["Reserve_ID"]);
 
         if ($stmt->execute()) {
 

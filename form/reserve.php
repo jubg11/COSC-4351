@@ -21,6 +21,9 @@ foreach ($period as $day) {
     <nav class="brand">
         <h2>Reservation Form</h2>
     </nav>
+    <?php if (!empty($res->show_err)) : ?>
+        <p class="red-text center"><?php echo $past->now_err; ?></p>
+    <?php endif  ?>
     <p class="center">Please provide search parameters for possible reservations.</p>
     <small style="text-align: center; display:block;">Hours of Operation: 10:00 (10AM) to 22:00 (10PM).</small>
     <!-- Form Input: Personal Info-->

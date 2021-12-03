@@ -55,6 +55,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["Search"]) {
                 <nav class="brand">
                     <h2>Reservations Found</h2>
                 </nav>
+                <?php if (!empty($res->search_err)) : ?>
+                    <p class="red-text center"><?php echo $res->search_err; ?></p>
+                <?php endif  ?>
                 <tr>
                     <th>Reservation Time</th>
                     <th>Table Size</th>

@@ -81,8 +81,9 @@ class Reservation
 
                 if ($stmt->affected_rows == 0) {
                     $this->CombineCalculate();
-                    echo "exiting combine";
                 }
+            } else {
+                $this->search_err = "Could not find any reservations.";
             }
             $stmt->close();
             $link->close();
@@ -188,9 +189,9 @@ class Reservation
             $stmt->bind_result($this->row_count);
             $stmt->fetch();
             print_r($this->row_count);
-            // if ($stmt->affected_rows == 0) {
-            //     $this->CombineCalculate();
-            // }
+            if ($this->row_count < $_POST["Guests"]) {
+                $this->search_err = "Could not find any reservations to fit number of guests.";
+            }
         }
         $stmt->close();
         $link->close();
