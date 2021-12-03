@@ -115,13 +115,13 @@ class Reservation
         $link->close();
     }
 
-    public function CheckHighTraffic()
+    public function CheckHighTraffic($reserve)
     {
         require __DIR__ . "/../config/db_connect.php";
 
         $sql = "SELECT * FROM sys.high_traffic_days WHERE date = ?";
         $stmt = $link->prepare($sql);
-        $stmt->bind_param("s", $_POST["Reserve_Date"]);
+        $stmt->bind_param("s", $reserve);
 
         $d_hold = 0;
         if ($stmt->execute()) {
@@ -174,6 +174,38 @@ class Reservation
         $link->close();
     }
 
+    public function ComboReserve($temp)
+    {
+
+        require __DIR__ . "/../config/db_connect.php";
+
+        $extra = "";
+        if (strcmp($_SESSION["Signed"], "in") == 0) {
+            $extra = ", user_id = ? ";
+        }
+
+        $sql = "UPDATE sys.reservation_tables 
+            SET name = ?, phone_num = ?, email = ?, guests = ?, reserved = '1'" . $extra .
+            "WHERE table_id = ?";
+        $stmt = $link->prepare($sql);
+
+        if (strcmp($_SESSION["Signed"], "in") == 0) {
+            $stmt->bind_param("ssssss", $_POST["Name"], $_POST["Phone"], $_POST["Email"], $_POST["Guests"], $_SESSION["ID"], $temp);
+        } else {
+            $stmt->bind_param("sssss", $_POST["Name"], $_POST["Phone"], $_POST["Email"], $_POST["Guests"], $temp);
+        }
+
+        if ($stmt->execute()) {
+            $stmt->close();
+            $link->close();
+            return true;
+        } else {
+            $stmt->close();
+            $link->close();
+            return false;
+        }
+    }
+
     private function CombineCalculate()
     {
         require __DIR__ . "/../config/db_connect.php";
@@ -188,9 +220,134 @@ class Reservation
         if ($stmt->execute()) {
             $stmt->bind_result($this->row_count);
             $stmt->fetch();
-            print_r($this->row_count);
+
             if ($this->row_count < $_POST["Guests"]) {
-                $this->search_err = "Could not find any reservations to fit number of guests.";
+                echo ("<script>
+                alert('Could not find any reservations to fit number of guests.');
+                </script>");
+                return;
+            }
+
+            require __DIR__ . "/../config/db_connect.php";
+
+            $sql = "SELECT * FROM sys.reservation_tables WHERE reservation_time = ? 
+                AND seats < ?
+                AND reserved = 0
+                ORDER BY seats DESC";
+            $stmt = $link->prepare($sql);
+            $this->datetime = $_POST["Date"] . " " . $_POST["Time"];
+            $stmt->bind_param("ss", $this->datetime,  $_POST["Guests"]);
+
+            if ($stmt->execute()) {
+                $results = $stmt->get_result();
+                $this->results = $results->fetch_all(MYSQLI_ASSOC);
+
+                $table_id = [];
+                $table_size = [];
+                foreach ($this->results as $x) {
+                    $table_id[] = $x["table_id"];
+                    $table_size[] = $x["seats"];
+                }
+
+
+                $taken_id = [];
+                $people = $_POST["Guests"];
+                while ($people > 0) {
+                    $table_id = array_values($table_id);
+                    $table_size = array_values($table_size);
+
+                    if ($people >= 8) {
+                        $max = max($table_size);
+                        $i = array_search($max, $table_size);
+
+                        $people = $people - $max;
+                        $taken_id[] = $table_id[$i];
+                        unset($table_id[$i]);
+                        unset($table_size[$i]);
+                        continue;
+                    } elseif ($people <= 2) {
+                        $min = min($table_size);
+                        $i = array_search($min, $table_size);
+
+                        $people = $people - $min;
+                        $taken_id[] = $table_id[$i];
+                        unset($table_id[$i]);
+                        unset($table_size[$i]);
+                        continue;
+                    } elseif ($people <= 4) {
+                        if (array_search(4, $table_size) !== false) {
+                            $i = array_search(4, $table_size);
+
+                            $people = $people - 4;
+                            $taken_id[] = $table_id[$i];
+                            unset($table_id[$i]);
+                            unset($table_size[$i]);
+                            continue;
+                        } else {
+                            $min = min($table_size);
+                            $i = array_search($min, $table_size);
+
+                            $people = $people - $min;
+                            $taken_id[] = $table_id[$i];
+                            unset($table_id[$i]);
+                            unset($table_size[$i]);
+                            continue;
+                        }
+                    } elseif ($people <= 6) {
+                        if (array_search(6, $table_size) !== false) {
+                            $i = array_search(6, $table_size);
+
+                            $people = $people - 6;
+                            $taken_id[] = $table_id[$i];
+                            unset($table_id[$i]);
+                            unset($table_size[$i]);
+                            continue;
+                        } else {
+                            $max = max($table_size);
+                            $i = array_search($max, $table_size);
+
+                            $people = $people - $max;
+                            $taken_id[] = $table_id[$i];
+                            unset($table_id[$i]);
+                            unset($table_size[$i]);
+                            continue;
+                        }
+                    } elseif ($people < 8) {
+                        if (array_search(8, $table_size) !== false) {
+                            $i = array_search(8, $table_size);
+
+                            $people = $people - 8;
+                            $taken_id[] = $table_id[$i];
+                            unset($table_id[$i]);
+                            unset($table_size[$i]);
+                            continue;
+                        } else {
+                            $max = max($table_size);
+                            $i = array_search($max, $table_size);
+
+                            $people = $people - $max;
+                            $taken_id[] = $table_id[$i];
+                            unset($table_id[$i]);
+                            unset($table_size[$i]);
+                            continue;
+                        }
+                    }
+                }
+
+                $taken_id;
+                $count = 0;
+                foreach ($taken_id as $combo_id) {
+                    $this->ComboReserve($combo_id);
+                    $count++;
+                }
+                if ($this->CheckHighTraffic($_POST["Date"]) > 0) {
+                    echo ("<script>
+                    alert('Due to high demand, to finalize this appointment a hold of $" . $hold . " will be placed');
+                    </script>");
+                }
+                echo ("<script>
+                alert('Reservation has been created. " . $count . " tables have been combined to accomodate this request.');
+                </script>");
             }
         }
         $stmt->close();

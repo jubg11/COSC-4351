@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["Search"]) {
     $checkpoint = 1;
     unset($_POST["Search"]);
 } elseif ($_SERVER["REQUEST_METHOD"] == "POST" && !$_POST["Search"]) {
-    $hold = $res->CheckHighTraffic();
+    $hold = $res->CheckHighTraffic($_POST["Reserve_Date"]);
     if ($hold > 0) {
         echo ("<script>
         alert('Due to high demand, to finalize this appointment a hold of $" . $hold . " will be placed');
@@ -44,9 +44,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["Search"]) {
 <!--Include Files-->
 <?php require_once __DIR__ . "/../ends/header.php"; ?>
 
+<?php if (strcmp($_SESSION["Signed"], "in") != 0) : ?>
+    <div class="red">
+        <h2 class="white-text center" style="text-shadow: 0px 2px 2px rgba(0,0,0,.2); font-size: 1vw;">Please consider creating an account to have a more complete experience.</h2>
+    </div>
+<?php endif; ?>
 
 <!-- Search Results -->
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" style="max-width: initial;">
+
+
     <?php require_once __DIR__ . "/../form/reserve.php"; ?>
 
     <div class="div-mid" style="width: 40%;">
