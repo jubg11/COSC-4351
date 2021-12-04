@@ -340,7 +340,8 @@ class Reservation
                     $this->ComboReserve($combo_id);
                     $count++;
                 }
-                if ($this->CheckHighTraffic($_POST["Date"]) > 0) {
+                $hold = $this->CheckHighTraffic($_POST["Date"]);
+                if ($hold > 0) {
                     echo ("<script>
                     alert('Due to high demand, to finalize this appointment a hold of $" . $hold . " will be placed');
                     </script>");
