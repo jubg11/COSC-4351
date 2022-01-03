@@ -1,4 +1,4 @@
-# COSC-4351
+# COSC-4351 Class Project
 
 ******************************  WHAT IS THIS? ******************************
 This project required that we (group of 3) create a way for users to reserve
